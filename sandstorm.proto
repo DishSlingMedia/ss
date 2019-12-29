@@ -19,7 +19,7 @@ message SandstormEvent {
     string run_type = 10;
     string environment = 11;
     string suites = 12;
-    google.protobuf.Timestamp local_time = 13; // ALTERNATELY USE UTC TIMESTAMP -- so INT64
+    google.protobuf.Timestamp local_time = 13;
     string automation_repo_version	= 14;
     int32 test_cases_in_input = 15;
     int32 test_cases_not_executed = 16;
@@ -31,7 +31,8 @@ message SandstormEvent {
     int32 test_case_failed_due_product_bugs = 22;
     int32 test_case_failures_yet_classified = 23;
     int32 total_time_taken_for_run_in_secs	= 24;
-    google.protobuf.Timestamp server_timestamp = 25; // OR UTC TIMESTAMP -- WHY IS SERVER_TIMESTAMP NEEDED AT ALL?
+    google.protobuf.Timestamp server_timestamp = 25; // DO NOT SEND THIS VALUE
+    int32 total_test_case_in_zephyr = 26;
 }
 
 message SandstormEventResponse {
@@ -41,7 +42,7 @@ message SandstormEventResponse {
 service DataPostService{
     rpc ReceiveData(SandstormEvent) returns (SandstormEventResponse) {
         option (google.api.http) = {
-        post: "/v1/data"
+        post: "/v1-alpha/sandstorm"
         body: "*"
     	};
     }
