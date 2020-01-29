@@ -33,6 +33,7 @@ message SandstormEvent {
     int32 total_time_taken_for_run_in_secs	= 24;
     google.protobuf.Timestamp server_timestamp = 25; // DO NOT SEND THIS VALUE
     int32 total_test_case_in_zephyr = 26;
+    string job_type = 27;
 }
 
 message SandstormEventResponse {
